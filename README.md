@@ -27,7 +27,9 @@ A rich set of UI components that enhance the visual appeal and user interaction.
 
 [Explore PrimeVue](https://primevue.org/)
 
-## Vuetify: A powerful Material Design component framework for Vue.js. Vuetify provides a wide range of pre-designed, customizable UI components that follow Material Design principles, ensuring your app looks polished and works seamlessly across devices. With 
+## Vuetify: 
+
+A powerful Material Design component framework for Vue.js. Vuetify provides a wide range of pre-designed, customizable UI components that follow Material Design principles, ensuring your app looks polished and works seamlessly across devices. With 
 
 Vuetify, you can easily create responsive layouts, integrate icons, and manage user interaction, all while maintaining a consistent design.
 
@@ -42,21 +44,29 @@ Starting the Development Server
 To start the development server with hot-reload, run the following command. The server will be accessible at http://localhost:200:
 
 bash
+
 Copy code
+
 yarn dev
+
 (Repeat for npm, pnpm, and bun with respective commands.)
 
 Building for Production
+
 To build your project for production, use:
 
 bash
+
 Copy code
+
 yarn build
+
 (Repeat for npm, pnpm, and bun with respective commands.)
 
 Once the build process is completed, your application will be ready for deployment in a production environment.
 
-📑 License
+## 📑 License
+
 MIT
 
 Copyright (c) 2024 Von Miones, XIID Technologies
