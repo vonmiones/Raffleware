@@ -15,8 +15,25 @@ This is a modern, interactive Web-based Raffle App built with Vue.js and PrimeVu
 
 ## 🚀 Built With:
 
-~ Vue.js: A progressive JavaScript framework for building fast, dynamic web applications. Vue 3
-~ PrimeVue: A rich set of UI components that enhance the visual appeal and user interaction. PrimeVue
+## Vue.js: 
+
+A progressive JavaScript framework for building fast, dynamic web applications. Vue 3 provides a flexible and efficient way to develop modern, single-page applications with reactive data binding and a component-based architecture.
+
+[Learn more about Vue.js](https://vuejs.org/)
+
+## PrimeVue
+
+A rich set of UI components that enhance the visual appeal and user interaction. PrimeVue offers a variety of customizable, responsive components, making it easy to build beautiful, interactive web interfaces.
+
+[Explore PrimeVue](https://primevue.org/)
+
+## Vuetify: A powerful Material Design component framework for Vue.js. Vuetify provides a wide range of pre-designed, customizable UI components that follow Material Design principles, ensuring your app looks polished and works seamlessly across devices. With 
+
+Vuetify, you can easily create responsive layouts, integrate icons, and manage user interaction, all while maintaining a consistent design.
+
+[Discover Vuetify](https://vuetifyjs.com/en/)
+
+
 
 ## 💡 Usage
 
