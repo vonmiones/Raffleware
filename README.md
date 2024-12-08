@@ -5,13 +5,18 @@ This is a modern, interactive Web-based Raffle App built with Vue.js and PrimeVu
 ## ✨Features 
 
 🎥 Real-time Raffle Drawings: Watch as the winners are drawn live with smooth animations for an exciting experience.
-📱 Responsive Design: Fully responsive layout that adapts beautifully across mobile, tablet, and desktop devices.
-⚙️ Easy-to-use Interface: Intuitive UI powered by PrimeVue components for a rich, interactive user experience.
-🎨 Customizable: Easily customize the app’s look and feel to match your brand or event theme.
-🚀 Built With:
 
-Vue.js: A progressive JavaScript framework for building fast, dynamic web applications. Vue 3
-PrimeVue: A rich set of UI components that enhance the visual appeal and user interaction. PrimeVue
+📱 Responsive Design: Fully responsive layout that adapts beautifully across mobile, tablet, and desktop devices.
+
+⚙️ Easy-to-use Interface: Intuitive UI powered by PrimeVue components for a rich, interactive user experience.
+
+🎨 Customizable: Easily customize the app’s look and feel to match your brand or event theme.
+
+
+## 🚀 Built With:
+
+~ Vue.js: A progressive JavaScript framework for building fast, dynamic web applications. Vue 3
+~ PrimeVue: A rich set of UI components that enhance the visual appeal and user interaction. PrimeVue
 
 ## 💡 Usage
 
