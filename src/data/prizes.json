@@ -1,0 +1,50 @@
+[
+    {
+        "label": "Grand Prize",
+        "code": "GRAND",
+        "items": [
+            {
+                "id": 1,
+                "count": 1,
+                "label": "Ford Raptor 2024 Model",
+                "value": "grandprize"
+            }
+        ]
+    },
+    {
+        "label": "Major Prizes",
+        "code": "MAJOR",
+        "items": [
+            {
+                "id": 2,
+                "count": 2,
+                "label": "Toyota Hilux 2023 Model",
+                "value": "majorprize"
+            },
+            {
+                "id": 3,
+                "count": 5,
+                "label": "Honda XRM 2023 Model",
+                "value": "majorprize"
+            }
+        ]
+    },
+    {
+        "label": "Minor Prizes",
+        "code": "MAJOR",
+        "items": [
+            {
+                "id": 4,
+                "count": 5,
+                "label": "Refrigerator",
+                "value": "minorprize"
+            },
+            {
+                "id": 5,
+                "count": 5,
+                "label": "Gas Range",
+                "value": "minorprize"
+            }
+        ]
+    }
+]

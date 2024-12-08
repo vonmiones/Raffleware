@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.controls {
+    margin-top: 50px;
+    display: flex;
+}
+.bg-red{
+    background-color: red;
+}
+button {
+    padding:10px;
+    min-width:150px;
+}
+.button-group {
+    width: auto;
+    margin:0 auto;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 100px;
+    overflow: hidden;
+}
+.prize-label  {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 45pt;
+    margin-top:250px;
+    margin-left:50px;
+    color: white;
+}
+.prize-color {
+    color: red;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+.column {
+    width: 55px;
+    height: 90px;
+    overflow: hidden;
+    position: relative;
+    margin-left:-5px;
+    margin-right:-5px;
+    background-color: transparent;
+}
+
+.photobanner {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.item {
+    height: 90px;
+    width: 100%;
+    display: block;
+    color: red;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    text-align: center;
+    font-size: 45pt;
+    background-color: transparent;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#winnerlist {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+    overflow: hidden;
+}
+#background {
+    position: absolute;
+    overflow: hidden;
+}
+#background img {
+    width: 100%;
+}
+.drawer-container {
+    backdrop-filter: blur(0px) saturate(100%);
+}
+.raffle-controls {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px) saturate(150%);
+}
