@@ -12,7 +12,7 @@
           </div> 
         </div>
       </div>
-      <div class="col-3 raffle-controls">
+      <div class="pa-2 raffle-controls">
         <div class="w-full font-bold underline" style="text-align:center; font-size:40pt;">
           {{ drawcountdisplay }} DRAW{{ drawcountdisplay > 1 ? "S" : "" }}
         </div>
@@ -45,10 +45,21 @@
           <Button size="small" @click="startInfiniteScroll">ROLL</Button>
           <Button size="small" @click="clearRoller">CLEAR</Button>
         </ButtonGroup>
+        <div class="pt-1">
+          <Button class="w-full"ze="small" @click="resetData">RESET DATA</Button>
+        </div>
+
         <div id="winnerlist">
           <ol>
             <li v-for="(winner, index) in winners" :key="index" :class="`rainbow-${winner.set}`">
              {{ winner.name }} [ <b>{{ winner.prize.label }}</b> ]
+            </li>
+          </ol>
+        </div>      
+        <div>
+          <ol>
+            <li v-for="(office, index) in selectedOffices" :key="index">
+             {{ office.department }}
             </li>
           </ol>
         </div>      
@@ -83,9 +94,12 @@ export default {
       rollHasEnded: false,
       banners: [],
       winnerOnScreen: null,
-      prizes: prizelists,
+      prizes: [],
       selectedPrizeLimit: 0,
+      cachedPrizes: [],
+      remainingPrizes: [],
       selectedPrize: [],
+      selectedOffices: [],
       disableInsteadOfRemove: false,
     };
   },
@@ -101,14 +115,24 @@ export default {
   },
   computed: {
     filteredPrizes() {
-      return this.prizes.map((group) => ({
+      let prizes = this.prizes.map((group) => ({
         ...group,
         items: group.items.filter((item) => (this.disableInsteadOfRemove ? true : item.count > 0)),
       }));
+
+      this.remainingPrizes = prizes;
+      return prizes;
     },
   },
   mounted() {
     this.container = document.getElementById("container");
+    let remainingprizes = JSON.parse(localStorage.getItem('remainingprizes'));
+    this.loadBrowserData();
+    if(_.size(remainingprizes) > 0) {
+      this.prizes = remainingprizes;
+    }else{
+      this.prizes = prizelists;
+    }
   },
   methods: {
     initializeRaffle(columnCount) {
@@ -186,9 +210,23 @@ export default {
     startDraw() {
       this.haswinner = false;
       this.winnerOnScreen = null;
+      let drawnOffice = true;
       const availableNames = [...this.names]; // Copy names to avoid modifying the original array
-      const selectedNames = this.shuffleArray(availableNames).slice(0, this.drawcount); // Select unique names
+      
+      
+      let selectedNames = this.shuffleArray(availableNames).slice(0, this.drawcount); // Select unique names
       const interval = this.drawInterval; // Adjustable interval in milliseconds
+      
+      while(drawnOffice){
+        let f = _.includes(availableNames,go);
+        if(f == false){
+          drawnOffice = false;
+        }else{
+          // select another name
+          selectedNames = this.shuffleArray(availableNames).slice(0, this.drawcount); // Select unique names
+        }
+      }
+
 
       const drawCycle = (nameIndex) => {
         if (nameIndex >= selectedNames.length) {
@@ -228,10 +266,19 @@ export default {
               // if (!this.selectedPrize || this.selectedPrize.count <= 0) return;
               
               this.winners.push(info);
+              this.selectedOffices.push({
+                department: selectedItem.department,
+                officeaccronym: selectedItem.officeaccronym,
+              });
               this.drawIndex++;
               this.winnerOnScreen = selectedItem;
               // Move to the next name after the interval
               setTimeout(() => drawCycle(nameIndex + 1), interval);
+              // save winners in the browser storage
+              localStorage.setItem('winners', JSON.stringify(this.winners));
+              localStorage.setItem('remainingprizes', JSON.stringify(this.remainingPrizes));
+              
+              this.loadBrowserData();
               this.haswinner = true;
             }
           });
@@ -241,6 +288,10 @@ export default {
       };
 
       drawCycle(0); // Start with the first name
+    },
+    loadBrowserData(){
+      let winners = JSON.parse(localStorage.getItem('winners'));
+      this.winners = winners;
     },
     markPrizeAsDrawn(prize) {
       prize.count -= 1;
@@ -282,6 +333,17 @@ export default {
       this.initializeRaffle(0);
       cancelAnimationFrame(this.animationTrigger);
     },
+    resetData() {
+      this.winners = [];
+      this.selectedPrize = [];
+      this.haswinner = false;
+      this.initializeRaffle(0);
+      cancelAnimationFrame(this.animationTrigger);
+      localStorage.setItem('winners', JSON.stringify([]));
+      localStorage.setItem('remainingprizes', JSON.stringify([]));
+
+    },
+
     startInfiniteScroll() {
       this.initializeRaffle(this.rollLength);
       const scrollBanner = (banner) => {
