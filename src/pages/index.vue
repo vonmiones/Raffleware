@@ -5,7 +5,12 @@
   <div class="flex h-full">
       <div class="col drawer-container">
         <div class="prize-label text-center">&nbsp;<span v-if="haswinner">Winner of <span class="prize-color">{{ selectedPrize.label }}</span></span></div>
-        <div id="container"></div>
+        <div id="container" ></div>
+        <div v-if="winnerOnScreen" class="text-center prize-color" style="font-size:30pt; font-family: 'Times New Roman', Times, serif;">
+          <div class="items-center pt-3" style="width:500px; margin:0 auto; line-height:25pt; border-top:5px solid white;">
+            {{  winnerOnScreen.department }} ({{ winnerOnScreen.officeaccronym }}) 
+          </div> 
+        </div>
       </div>
       <div class="col-3 raffle-controls">
         <div class="w-full font-bold underline" style="text-align:center; font-size:40pt;">
@@ -35,7 +40,8 @@
         </div>
 
         <ButtonGroup class="w-full mt-2">
-          <Button size="small" @click="draw">DRAW</Button>
+          <Button v-if="selectedPrize != null" size="small" @click="draw">DRAW</Button>
+          <Button v-else disabled size="small" @click="draw">DRAW</Button>
           <Button size="small" @click="startInfiniteScroll">ROLL</Button>
           <Button size="small" @click="clearRoller">CLEAR</Button>
         </ButtonGroup>
@@ -54,6 +60,9 @@
 <script>
 import nameentries from '@/data/entries.json';
 import prizelists from '@/data/prizes.json';
+import { toRaw } from "vue";
+import _ from "lodash";
+
 export default {
   data() {
     return {
@@ -73,7 +82,7 @@ export default {
       animationTrigger: null,
       rollHasEnded: false,
       banners: [],
-
+      winnerOnScreen: null,
       prizes: prizelists,
       selectedPrizeLimit: 0,
       selectedPrize: [],
@@ -176,6 +185,7 @@ export default {
     },
     startDraw() {
       this.haswinner = false;
+      this.winnerOnScreen = null;
       const availableNames = [...this.names]; // Copy names to avoid modifying the original array
       const selectedNames = this.shuffleArray(availableNames).slice(0, this.drawcount); // Select unique names
       const interval = this.drawInterval; // Adjustable interval in milliseconds
@@ -187,11 +197,13 @@ export default {
           return;
         }
 
-        const selectedWord = selectedNames[nameIndex];
-        const selectedLetters = selectedWord.split("");
-
+        const selectedItem = selectedNames[nameIndex];
+        console.log(selectedItem);
+        const name = `${selectedItem.firstname} ${selectedItem.middlename != "" ? selectedItem.middlename.substring(0,1).trim()+"." : ''} ${selectedItem.lastname} ${selectedItem.suffix}`;
+        const selectedLetters = name.split("");
+        
         this.initializeRaffle(selectedLetters.length);
-
+        
         let completedAnimations = 0;
         selectedLetters.forEach((letter, index) => {
           const duration = 1000 + index * 100;
@@ -199,20 +211,25 @@ export default {
             completedAnimations++;
             if (completedAnimations === selectedLetters.length) {
               const info = {
-                name: selectedWord,
+                name: name,
                 index: this.drawIndex,
                 id: `${this.drawSet}-${this.drawIndex}`,
                 set: this.drawSet,
+                department: selectedItem.department,
+                officeaccronym: selectedItem.officeaccronym,
+                position: selectedItem.position,
+                jobstatus: selectedItem.jobtype,
                 prize: this.selectedPrize,
                 prizeid: this.selectedPrize.id
               };
-
-
               
-             // if (!this.selectedPrize || this.selectedPrize.count <= 0) return;
-
+              
+              
+              // if (!this.selectedPrize || this.selectedPrize.count <= 0) return;
+              
               this.winners.push(info);
               this.drawIndex++;
+              this.winnerOnScreen = selectedItem;
               // Move to the next name after the interval
               setTimeout(() => drawCycle(nameIndex + 1), interval);
               this.haswinner = true;
